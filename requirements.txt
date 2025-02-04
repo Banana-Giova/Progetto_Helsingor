@@ -1,0 +1,9 @@
+Flask
+psycopg2-binary
+requests
+python-decouple
+flask_restx
+flask_sqlalchemy
+flask_migrate
+sqlalchemy
+Flask-JWT-Extended
