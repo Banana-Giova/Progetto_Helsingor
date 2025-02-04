@@ -5,33 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from exts import *
 
-# class Prenotazione(db.Model):
-#     id = db.Column(db.Integer(), primary_key = True)
-#     nominativo = db.Column(db.String(), unique = True, nullable = False)
-#     telefono = db.Column(db.String(), nullable = True)
-#     posti_pren = db.Column(db.Integer(), nullable = False)
-#     posti_bimbi = db.Column(db.Integer(), nullable = False)
-#     via_mail = db.Column(db.Boolean(), nullable = False)
-#     donazione = db.Column(db.String(), nullable = True)
-
-#     def __repr__(self):
-#         return f"<Prenotazione a ID = {self.id!r}, Nominativo = {self.nominativo!r}>"
-    
-#     def save(self):
-#         db.session.add(self)
-#         db.session.commit()
-
-#     def delete(self):
-#         db.session.delete(self)
-#         db.session.commit()
-
-#     def update(self, telefono, posti_pren, posti_bimbi, via_mail, donazioni):
-#         self.telefono = telefono
-#         self.posti_pren = posti_pren
-#         self.posti_bimbi = posti_bimbi
-#         self.via_mail = via_mail
-#         self.donazioni = donazioni
-
 class Base(DeclarativeBase):
     pass
 
@@ -39,14 +12,15 @@ class Moderatori(db.Model):
     __tablename__ = "Moderatori"
     
     username: Mapped[str] = mapped_column(db.String(32), primary_key=True)
-    password: Mapped[str] = mapped_column(db.String(32), unique=True, nullable=False)
+    email: Mapped[str] = mapped_column(db.String(64), unique=True, nullable=False)
+    password: Mapped[str] = mapped_column(db.String(128), unique=True, nullable=False)
 
     def __repr__(self):
         return f"<Moderatore a nome {self.username!r}>"
     
     def _validate_password(self):
-        if len(self.password) > 32:
-            raise ValueError("La passwordl non può superare i 32 caratteri.")
+        if len(self.password) > 128:
+            raise ValueError("La password non può superare i 128 caratteri.")
 
     def save(self):
         try:
