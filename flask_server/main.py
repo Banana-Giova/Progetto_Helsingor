@@ -1,9 +1,8 @@
-from flask import Flask # type: ignore
+from flask import Flask
 from flask_restx import Api #type: ignore
 from models import Moderatori, Prenotazioni
 from exts import db
 from flask_jwt_extended import JWTManager #type: ignore
-from flask_migrate import Migrate #type: ignore
 from prenotazioni import preno_ns
 from auth import auth_ns
 
@@ -12,7 +11,6 @@ def create_app(config):
     app.config.from_object(config)
 
     db.init_app(app)
-    migrate = Migrate(app,db)
     JWTManager(app)
 
     api = Api(app, doc='/docs')
