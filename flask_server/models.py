@@ -61,11 +61,13 @@ class Prenotazioni(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     nominativo: Mapped[str] = mapped_column(db.String(32))
     email: Mapped[str] = mapped_column(db.String(64))
+    giorno_scelto: Mapped[str] = mapped_column(db.String(32))
     telefono: Mapped[Optional[str]] = mapped_column(db.String(16), nullable=True)
     posti_pren: Mapped[int] = mapped_column(db.Integer, nullable=False)
     posti_bimbi: Mapped[int] = mapped_column(db.Integer, nullable=False)
     via_mail: Mapped[bool] = mapped_column(db.Boolean, nullable=False)
     donazioni: Mapped[Optional[str]] = mapped_column(db.String(64), nullable=True)
+    istante: Mapped[int] = mapped_column(db.Integer, nullable=False)
 
     __table_args__ = (
         CheckConstraint('posti_pren > 0', name='check_positive_posti'),
@@ -82,6 +84,10 @@ class Prenotazioni(db.Model):
     def _validate_email(self):
         if len(self.email) > 64:
             raise ValueError("L'email non può superare i 64 caratteri.")
+        
+    def _validate_giorno_scelto(self):
+        if len(self.giorno_scelto) > 32:
+            raise ValueError("Il campo giorno scelto non può superare i 32 caratteri.")
         
     def _validate_telefono(self):
         if self.telefono and len(self.telefono) > 16:
@@ -112,16 +118,19 @@ class Prenotazioni(db.Model):
             db.session.rollback()
             raise e
 
-    def update(self, email, telefono, posti_pren, posti_bimbi, via_mail, donazioni):
+    def update(self, email, giorno_scelto, telefono, posti_pren, posti_bimbi, via_mail, donazioni, istante):
         self.email = email
+        self.giorno_scelto = giorno_scelto
         self.telefono = telefono
         self.posti_pren = posti_pren
         self.posti_bimbi = posti_bimbi
         self.via_mail = via_mail
         self.donazioni = donazioni
+        self.istante = istante
 
         self._validate_nominativo()
         self._validate_email()
+        self._validate_giorno_scelto()
         self._validate_telefono()
         self._validate_posti()
         self._validate_donazioni()

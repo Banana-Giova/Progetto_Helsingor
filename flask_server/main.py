@@ -1,8 +1,7 @@
 from flask import Flask # type: ignore
 from flask_restx import Api #type: ignore
-from models import *
-from exts import *
-from methods import *
+from models import Moderatori, Prenotazioni
+from exts import db
 from flask_jwt_extended import JWTManager #type: ignore
 from flask_migrate import Migrate #type: ignore
 from prenotazioni import preno_ns
@@ -19,13 +18,5 @@ def create_app(config):
     api = Api(app, doc='/docs')
     api.add_namespace(preno_ns)
     api.add_namespace(auth_ns)
-
-    @app.shell_context_processor
-    def make_shell_context():
-        return {
-            "db":db,
-            "Moderatori":Moderatori,
-            "Prenotazioni":Prenotazioni
-        }
 
     return app

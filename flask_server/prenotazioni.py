@@ -13,11 +13,13 @@ prenotazioni_model = preno_ns.model(
         "id": fields.Integer(),
         "nominativo": fields.String(required=True, max_length=32),
         "email": fields.String(required=True, max_length=64),
+        "giorno_scelto": fields.String(required=True, max_length=32),
         "telefono": fields.String(required=False, max_length=16),
         "posti_pren": fields.Integer(required=True),
         "posti_bimbi": fields.Integer(required=True),
         "via_mail": fields.Boolean(required=True),
-        "donazioni": fields.String(required=False, max_length=64)
+        "donazioni": fields.String(required=False, max_length=64),
+        "istante": fields.Integer(required=True)
     }
 )
 
@@ -40,11 +42,13 @@ class PrenotazioniResource(Resource):
         new_prenotazione = Prenotazioni(
             nominativo = data.get('nominativo'),
             email = data.get('email'),
+            giorno_scelto = data.get('giorno_scelto'),
             telefono = data.get('telefono'),
             posti_pren = data.get('posti_pren'),
             posti_bimbi = data.get('posti_bimbi'),
             via_mail = data.get('via_mail'),
             donazioni = data.get('donazioni'),
+            istante = data.get('istante')
         )
         new_prenotazione.save()
         
@@ -81,11 +85,14 @@ class PrenotazioniResource(Resource):
 
         up_prenotazione.update(
             email = data.get('email'),
+            giorno_scelto = data.get('giorno_scelto'),
             telefono = data.get('telefono'),
             posti_pren = data.get('posti_pren'),
             posti_bimbi = data.get('posti_bimbi'),
             via_mail = data.get('via_mail'),
-            donazioni = data.get('donazioni'))
+            donazioni = data.get('donazioni'),
+            istante = data.get('istante')
+            )
         
         refyes_refno = data.get('referente')
         referente = f"Referente di {up_prenotazione.nominativo} => {refyes_refno if refyes_refno != None and refyes_refno != '' else 'Nessuno'}"
