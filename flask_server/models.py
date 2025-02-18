@@ -13,14 +13,14 @@ class Moderatori(db.Model):
     
     username: Mapped[str] = mapped_column(db.String(32), primary_key=True)
     email: Mapped[str] = mapped_column(db.String(64), unique=True, nullable=False)
-    password: Mapped[str] = mapped_column(db.String(128), unique=True, nullable=False)
+    password: Mapped[str] = mapped_column(db.String(256), unique=True, nullable=False)
 
     def __repr__(self):
         return f"<Moderatore a nome {self.username!r}>"
     
     def _validate_password(self):
-        if len(self.password) > 128:
-            raise ValueError("La password non può superare i 128 caratteri.")
+        if len(self.password) > 256:
+            raise ValueError("La password non può superare i 256 caratteri.")
 
     def save(self):
         try:
@@ -118,7 +118,7 @@ class Prenotazioni(db.Model):
             db.session.rollback()
             raise e
 
-    def update(self, email, giorno_scelto, telefono, posti_pren, posti_bimbi, via_mail, donazioni, istante):
+    def update(self, email, giorno_scelto, telefono, posti_pren, posti_bimbi, via_mail, donazioni):
         self.email = email
         self.giorno_scelto = giorno_scelto
         self.telefono = telefono
@@ -126,7 +126,6 @@ class Prenotazioni(db.Model):
         self.posti_bimbi = posti_bimbi
         self.via_mail = via_mail
         self.donazioni = donazioni
-        self.istante = istante
 
         self._validate_nominativo()
         self._validate_email()

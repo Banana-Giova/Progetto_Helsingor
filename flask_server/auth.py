@@ -89,7 +89,9 @@ class ModeratoriResource(Resource):
     @auth_ns.marshal_with(moderatori_model)
     def get(self, username):
         #Get a moderatore by username
-        moderatore = Moderatori.query.get_or_404(username)
+        moderatore = Moderatori.query.filter_by(username=username).first()
+        if moderatore is None:
+            return {'message': 'Moderatore non trovato'}, 404
         return moderatore
 
     @jwt_required()
@@ -111,4 +113,8 @@ class ModeratoriResource(Resource):
         del_moderatore:Moderatori = Moderatori.query.get_or_404(username)
 
         del_moderatore.delete()
-        return jsonify({"message":"Moderatore eliminato con successo!"})
+        return make_response(jsonify(
+            {"message":"Moderatore eliminato con successo!"}),
+            204)
+    
+    

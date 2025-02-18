@@ -1,7 +1,7 @@
 from flask_restx import Resource, Namespace, fields #type:ignore
 from models import *
 from methods import *
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required #type: ignore
 
@@ -62,7 +62,7 @@ class PrenotazioniResource(Resource):
         references_and_mails[new_prenotazione.id] = (referente, mail_future)
         write_refama(references_and_mails)
 
-        return jsonify({"message":"Prenotazione effettuata con successo!"})
+        return make_response(jsonify({"message":"Prenotazione effettuata con successo!"}), 201)
 
 
 #Prenotazioni with ID
@@ -90,8 +90,7 @@ class PrenotazioniResource(Resource):
             posti_pren = data.get('posti_pren'),
             posti_bimbi = data.get('posti_bimbi'),
             via_mail = data.get('via_mail'),
-            donazioni = data.get('donazioni'),
-            istante = data.get('istante')
+            donazioni = data.get('donazioni')
             )
         
         refyes_refno = data.get('referente')
@@ -111,4 +110,4 @@ class PrenotazioniResource(Resource):
         del_prenotazione:Prenotazioni = Prenotazioni.query.get_or_404(id)
 
         del_prenotazione.delete()
-        return jsonify({"message":"Prenotazione eliminata con successo!"})
+        return make_response(jsonify({"message":"Prenotazione eliminata con successo!"}), 204)

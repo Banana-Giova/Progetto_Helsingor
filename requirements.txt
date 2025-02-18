@@ -7,4 +7,5 @@ flask_sqlalchemy
 flask_migrate
 python-dotenv
 sqlalchemy
+python-dotenv
 Flask-JWT-Extended
