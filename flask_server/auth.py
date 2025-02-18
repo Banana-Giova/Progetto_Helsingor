@@ -1,6 +1,6 @@
 from flask_restx import Resource, Namespace, fields #type:ignore
 from models import *
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required #type: ignore
 
@@ -55,7 +55,9 @@ class ModeratoriResource(Resource):
         )
         new_moderatore.save()
 
-        return jsonify({"message":"Moderatore creato con successo!"})
+        return make_response(jsonify(
+            {"message":"Moderatore creato con successo!"}),
+            201)
     
 @auth_ns.route('/moderatori/accesso', methods=['POST'])
 class ModeratoriResource(Resource):

@@ -23,7 +23,7 @@ prenotazioni_model = preno_ns.model(
     }
 )
 
-@preno_ns.route('/prenotazioni', methods=['GET', 'POST'])
+@preno_ns.route('/', methods=['GET', 'POST'])
 class PrenotazioniResource(Resource):
     
     @jwt_required()
@@ -66,7 +66,7 @@ class PrenotazioniResource(Resource):
 
 
 #Prenotazioni with ID
-@preno_ns.route('/prenotazioni/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+@preno_ns.route('/<int:id>', methods=['GET', 'PUT', 'DELETE'])
 class PrenotazioniResource(Resource):
 
     @jwt_required()
