@@ -1,27 +1,10 @@
-import React, {useEffect, useState} from "react";
-import ReactDOM from "react-dom";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
 
-
-const App=()=>{
-    
-    useEffect(
-        ()=>{
-            fetch('/prenotazioni/hello')
-            .then(response=>response.json())
-            .then(data=>{console.log(data)
-                setMessage(data.message)
-            })
-            .catch(err=>console.log(err))
-        },[]
-    )
-
-    const [message, setMessage]=useState('')
-    return (
-        <div className="app">
-            {message}
-        </div>
-        )
-}
-
-
-ReactDOM.createRoot(<App/>, document.getElementById('root'));
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)

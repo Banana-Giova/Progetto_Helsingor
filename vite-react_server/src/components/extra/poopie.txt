@@ -1,0 +1,8 @@
+  const [message, setMessage] = useState('');
+  <h1>{message}</h1>
+  <button 
+    onClick={() => axios.get('http://localhost:3101/prenotazioni/hello')
+                        .then(result => setMessage(result.data.message))}
+  >
+    Wanna greet the world?
+  </button>
