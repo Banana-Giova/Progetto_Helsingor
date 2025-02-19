@@ -111,3 +111,8 @@ class PrenotazioniResource(Resource):
 
         del_prenotazione.delete()
         return make_response(jsonify({"message":"Prenotazione eliminata con successo!"}), 204)
+
+@preno_ns.route('/hello', methods=['GET'])
+class HelloResource(Resource):
+    def get(self):
+        return {"message":"Hello World"}

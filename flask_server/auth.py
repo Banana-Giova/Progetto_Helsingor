@@ -2,7 +2,7 @@ from flask_restx import Resource, Namespace, fields #type:ignore
 from models import *
 from flask import Flask, request, jsonify, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required #type: ignore
+from flask_jwt_extended import JWTManager, get_jwt_identity, create_access_token, create_refresh_token, jwt_required #type: ignore
 
 auth_ns = Namespace('auth', description = "A namespace for our Authentication.")
 
@@ -117,4 +117,12 @@ class ModeratoriResource(Resource):
             {"message":"Moderatore eliminato con successo!"}),
             204)
     
-    
+@auth_ns.route('/refresh')
+class RefreshResource(Resource):
+    @jwt_required(refresh=True)
+    def post(self):
+        
+        current_user = get_jwt_identity()
+        new_access_token = create_access_token(identity=current_user)
+
+        return make_response(jsonify({"access_token":new_access_token}), 200)

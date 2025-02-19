@@ -9,3 +9,4 @@ python-dotenv
 sqlalchemy
 python-dotenv
 Flask-JWT-Extended
+flask-cors
