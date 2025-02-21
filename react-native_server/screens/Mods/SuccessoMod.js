@@ -7,7 +7,7 @@ const SuccessoMod = ({ navigation }) => {
     <ProtectedRoute>
         <View style={styles.container}>
         <Text style={styles.title}>Operazione eseguita con successo!</Text>
-        <View style={styles.divider} />
+        <View style={styles.hr} />
 
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AreaModeratori')}>
             <Text style={styles.buttonText}>Accedi all'area moderatori!</Text>

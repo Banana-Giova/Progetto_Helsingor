@@ -1,21 +1,23 @@
 import React, { useState } from "react";
+import { Form, Button } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 import authAxios from "../../authAxios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const EditPrenotazione = () => {
-  const [id, setId] = useState("");
-  const [email, setEmail] = useState("");
-  const [giornoScelto, setGiornoScelto] = useState("");
-  const [telefono, setTelefono] = useState("");
-  const [postiPren, setPostiPren] = useState("");
-  const [postiBimbi, setPostiBimbi] = useState("");
-  const [viaMail, setViaMail] = useState(false);
-  const [donazioni, setDonazioni] = useState("");
-  const [referente, setReferente] = useState("");
-  const [mailFuture, setMailFuture] = useState(false);
   const [message, setMessage] = useState("");
+  const [id, setId] = useState("");
+  
+  const { 
+    register, 
+    handleSubmit, 
+    watch,
+    formState: { errors } 
+  } = useForm();
+  
+  const postiPren = watch("posti_pren");
 
-  const handleUpdate = async () => {
+  const onSubmit = async (data) => {
     if (!id.trim()) {
       setMessage("⚠️ Inserisci un ID prenotazione valido.");
       return;
@@ -23,15 +25,15 @@ const EditPrenotazione = () => {
 
     try {
       await authAxios.put(`/prenotazioni/${id}`, {
-        email,
-        giorno_scelto: giornoScelto,
-        telefono,
-        posti_pren: postiPren,
-        posti_bimbi: postiBimbi,
-        via_mail: viaMail,
-        donazioni,
-        referente,
-        mail_future: mailFuture,
+        email: data.email,
+        giorno_scelto: data.giorno_scelto,
+        telefono: data.telefono || null,
+        posti_pren: Number(data.posti_pren),
+        posti_bimbi: Number(data.posti_bimbi),
+        via_mail: data.via_mail === "true",
+        donazioni: data.donazioni || null,
+        referente: data.referente || null,
+        mail_future: data.mail_future === "true"
       });
 
       setMessage("✅ Prenotazione aggiornata con successo!");
@@ -44,118 +46,150 @@ const EditPrenotazione = () => {
     <div className="container mt-4">
       <div className="card shadow-lg p-4 bg-dark text-light">
         <h2 className="text-center mb-4">Modifica Prenotazione</h2>
-
-        <div className="mb-3">
-          <label className="form-label">ID Prenotazione</label>
-          <input
+        <hr className="border-light"/>
+        
+        {/* ID Prenotazione (prima del form) */}
+        <Form.Group className="mb-3">
+          <Form.Label>ID Prenotazione</Form.Label>
+          <Form.Control 
             type="text"
-            className="form-control bg-secondary text-light border-0"
+            className="bg-secondary text-light border-0"
             placeholder="Inserisci l'ID della prenotazione"
             value={id}
             onChange={(e) => setId(e.target.value)}
           />
-        </div>
+        </Form.Group>
 
-        <div className="mb-3">
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            className="form-control bg-secondary text-light border-0"
-            placeholder="Inserisci la nuova email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Giorno Scelto</label>
-          <input
-            type="text"
-            className="form-control bg-secondary text-light border-0"
-            placeholder="Es. 2024-05-12"
-            value={giornoScelto}
-            onChange={(e) => setGiornoScelto(e.target.value)}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Telefono</label>
-          <input
-            type="tel"
-            className="form-control bg-secondary text-light border-0"
-            placeholder="Inserisci il numero di telefono"
-            value={telefono}
-            onChange={(e) => setTelefono(e.target.value)}
-          />
-        </div>
-
-        <div className="row">
-          <div className="col-md-6 mb-3">
-            <label className="form-label">Posti Prenotati</label>
-            <input
-              type="number"
-              className="form-control bg-secondary text-light border-0"
-              value={postiPren}
-              onChange={(e) => setPostiPren(e.target.value)}
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          {/* Email */}
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control 
+              type="email"
+              className="bg-secondary text-light border-0"
+              placeholder="esempio@mail.com"
+              {...register("email", { pattern: /^\S+@\S+$/i, maxLength: 64 })}
             />
+            {errors.email && <p className="text-warning">{errors.email.message}</p>}
+          </Form.Group>
+
+          {/* Giorno scelto */}
+          <Form.Group className="mb-3">
+            <Form.Label>Giorno Scelto</Form.Label>
+            <Form.Control 
+              type="text"
+              className="bg-secondary text-light border-0"
+              placeholder="Es. 2024-05-12"
+              {...register("giorno_scelto", { maxLength: 32 })}
+            />
+            {errors.giorno_scelto && <p className="text-warning">{errors.giorno_scelto.message}</p>}
+          </Form.Group>
+
+          {/* Telefono */}
+          <Form.Group className="mb-3">
+            <Form.Label>Telefono</Form.Label>
+            <Form.Control 
+              type="tel"
+              className="bg-secondary text-light border-0"
+              placeholder="Inserisci il numero di telefono"
+              {...register("telefono", { maxLength: 16 })}
+            />
+            {errors.telefono && <p className="text-warning">{errors.telefono.message}</p>}
+          </Form.Group>
+
+          {/* Posti prenotati & Posti bambini */}
+          <div className="row">
+            <Form.Group className="mb-3 col-md-6">
+              <Form.Label>Posti Prenotati</Form.Label>
+              <Form.Control 
+                type="number"
+                className="bg-secondary text-light border-0"
+                {...register("posti_pren", { min: 1 })}
+              />
+              {errors.posti_pren && <p className="text-warning">{errors.posti_pren.message}</p>}
+            </Form.Group>
+
+            <Form.Group className="mb-3 col-md-6">
+              <Form.Label>Di cui Bambini</Form.Label>
+              <Form.Control 
+                type="number"
+                className="bg-secondary text-light border-0"
+                {...register("posti_bimbi", { 
+                  min: 0, 
+                  validate: value => (postiPren && Number(value) >= Number(postiPren)) ? "I posti bambini devono essere inferiori" : true 
+                })}
+              />
+              {errors.posti_bimbi && <p className="text-warning">{errors.posti_bimbi.message}</p>}
+            </Form.Group>
           </div>
 
-          <div className="col-md-6 mb-3">
-            <label className="form-label">Di cui Bambini</label>
-            <input
-              type="number"
-              className="form-control bg-secondary text-light border-0"
-              value={postiBimbi}
-              onChange={(e) => setPostiBimbi(e.target.value)}
+          {/* Donazioni */}
+          <Form.Group className="mb-3">
+            <Form.Label>Donazioni</Form.Label>
+            <Form.Control 
+              type="text"
+              className="bg-secondary text-light border-0"
+              placeholder="Inserisci l'importo o il tipo di donazione"
+              {...register("donazioni", { maxLength: 64 })}
             />
+          </Form.Group>
+
+          {/* Referente */}
+          <Form.Group className="mb-3">
+            <Form.Label>Referente</Form.Label>
+            <Form.Control 
+              type="text"
+              className="bg-secondary text-light border-0"
+              placeholder="Nome del referente"
+              {...register("referente", { maxLength: 64 })}
+            />
+          </Form.Group>
+
+          {/* Ricevi aggiornamenti via mail */}
+          <Form.Group className="mb-3 text-center">
+            <Form.Label>Ricevi aggiornamenti via mail</Form.Label>
+            <div className="d-flex justify-content-center gap-3">
+              <Form.Check 
+                type="radio"
+                label="Sì"
+                value="true"
+                {...register("via_mail")}
+              />
+              <Form.Check 
+                type="radio"
+                label="No"
+                value="false"
+                {...register("via_mail")}
+              />
+            </div>
+          </Form.Group>
+
+          {/* Desidera ricevere mail in futuro */}
+          <Form.Group className="mb-3 text-center">
+            <Form.Label>Desidera ricevere mail in futuro</Form.Label>
+            <div className="d-flex justify-content-center gap-3">
+              <Form.Check 
+                type="radio"
+                label="Sì"
+                value="true"
+                {...register("mail_future")}
+              />
+              <Form.Check 
+                type="radio"
+                label="No"
+                value="false"
+                {...register("mail_future")}
+              />
+            </div>
+          </Form.Group>
+
+          {/* Bottone di Modifica */}
+          <div className="text-center">
+            <Button type="submit" variant="outline-light" className="w-100">
+              ✏️ Modifica Prenotazione
+            </Button>
           </div>
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Donazioni</label>
-          <input
-            type="text"
-            className="form-control bg-secondary text-light border-0"
-            placeholder="Inserisci l'importo o il tipo di donazione"
-            value={donazioni}
-            onChange={(e) => setDonazioni(e.target.value)}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Referente</label>
-          <input
-            type="text"
-            className="form-control bg-secondary text-light border-0"
-            placeholder="Nome del referente"
-            value={referente}
-            onChange={(e) => setReferente(e.target.value)}
-          />
-        </div>
-
-        <div className="form-check mb-3">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            checked={viaMail}
-            onChange={() => setViaMail(!viaMail)}
-          />
-          <label className="form-check-label">Ricevi aggiornamenti via mail</label>
-        </div>
-
-        <div className="form-check mb-3">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            checked={mailFuture}
-            onChange={() => setMailFuture(!mailFuture)}
-          />
-          <label className="form-check-label">Desidera ricevere mail in futuro</label>
-        </div>
-
-        <button className="btn btn-outline-light w-100" onClick={handleUpdate}>
-          ✏️ Modifica Prenotazione
-        </button>
+        </Form>
 
         {message && <div className="alert alert-secondary mt-3">{message}</div>}
       </div>

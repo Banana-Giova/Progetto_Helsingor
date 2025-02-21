@@ -50,6 +50,7 @@ const ModificaPrenotazione = () => {
         <View style={styles.card}>
           <Text style={styles.title}>✏️ Modifica Prenotazione</Text>
 
+          <TextInput style={styles.input} placeholder="ID Prenotazione" placeholderTextColor="#aaa" value={id} onChangeText={setId} keyboardType="text" />
           <TextInput style={styles.input} placeholder="Email" placeholderTextColor="#aaa" value={email} onChangeText={setEmail} keyboardType="email-address" />
           <TextInput style={styles.input} placeholder="Giorno Scelto (es. 2024-05-12)" placeholderTextColor="#aaa" value={giornoScelto} onChangeText={setGiornoScelto} />
           <TextInput style={styles.input} placeholder="Telefono" placeholderTextColor="#aaa" value={telefono} onChangeText={setTelefono} keyboardType="phone-pad" />

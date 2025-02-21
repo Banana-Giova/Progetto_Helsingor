@@ -24,33 +24,34 @@ export default Successo;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',  
+    backgroundColor: '#1e1e1e',
+    padding: 20,
     alignItems: 'center',
-    padding: 16,
-    backgroundColor: '#000', // sfondo scuro, ad esempio
+    justifyContent: 'center',
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: 20,
   },
-  hr: {
+  divider: {
+    height: 2,
     width: '80%',
-    height: 1,
-    backgroundColor: '#ccc',
-    marginVertical: 16,
+    backgroundColor: '#ddd',
+    marginVertical: 20,
   },
   button: {
-    backgroundColor: '#dc3545', // simile a btn-danger
+    backgroundColor: '#d9534f',
     paddingVertical: 12,
     paddingHorizontal: 20,
-    borderRadius: 4,
+    borderRadius: 8,
+    marginTop: 10,
   },
   buttonText: {
+    fontSize: 16,
     color: '#fff',
-    fontSize: 18,
     fontWeight: 'bold',
   },
 });
