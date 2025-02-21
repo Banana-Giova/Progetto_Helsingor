@@ -6,7 +6,7 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div className="container-fluid">
         {/* Titolo a sinistra */}
-        <Link className="navbar-brand" to="/home">Teatro Stabile Helsingor</Link>
+        <Link className="navbar-brand" to="/">Teatro Stabile Helsingor</Link>
         
         {/* Bottone per dispositivi mobili */}
         <button 

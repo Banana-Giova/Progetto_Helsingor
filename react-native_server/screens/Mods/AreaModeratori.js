@@ -4,7 +4,7 @@ import ProtectedRoute from '../utils/ProtectedRoute';
 
 const AreaModeratori = ({ navigation }) => {
   return (
-    <ProtectedRoute>
+    <ProtectedRoute >
       <View style={styles.container}>
         <Text style={styles.title}>Benvenuto nell'Area Moderatori!</Text>
         <View style={styles.divider} />

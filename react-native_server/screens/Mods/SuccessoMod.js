@@ -4,7 +4,7 @@ import ProtectedRoute from '../utils/ProtectedRoute';
 
 const SuccessoMod = ({ navigation }) => {
   return (
-    <ProtectedRoute>
+    <ProtectedRoute navigation={navigation}>
         <View style={styles.container}>
         <Text style={styles.title}>Operazione eseguita con successo!</Text>
         <View style={styles.hr} />

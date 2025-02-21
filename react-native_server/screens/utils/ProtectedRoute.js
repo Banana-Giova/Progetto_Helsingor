@@ -15,17 +15,21 @@ const ProtectedRoute = ({ children }) => {
                     setIsAuthenticated(true);
                 } else {
                     setIsAuthenticated(false);
-                    navigation.replace('Login');
                 }
             } catch (error) {
                 console.error("Errore nel controllo dell'autenticazione:", error);
                 setIsAuthenticated(false);
-                navigation.replace('Login');
             }
         };
 
         checkAuth();
-    }, [navigation]);
+    }, []);
+
+    useEffect(() => {
+        if (isAuthenticated === false && navigation) {
+            navigation.replace('Login');
+        }
+    }, [isAuthenticated, navigation]);
 
     if (isAuthenticated === null) {
         return (

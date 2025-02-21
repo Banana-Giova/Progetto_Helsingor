@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
 import authAxios from '../utils/AuthAxios';
+import Backbutton from '../utils/Backbutton';
 
 const LoginModeratore = () => {
     const { control, handleSubmit, formState: { errors } } = useForm();
@@ -32,6 +33,7 @@ const LoginModeratore = () => {
 
     return (
         <View style={styles.container}>
+            <Backbutton navigation={navigation} />
             <Text style={styles.title}>Sei un Moderatore? Accedi qui!</Text>
 
             {/* Username */}

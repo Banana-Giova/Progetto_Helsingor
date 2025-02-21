@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView } from "react-native";
 import authAxios from "../utils/AuthAxios";
+import Backbutton from "../utils/Backbutton";
 import ProtectedRoute from "../utils/ProtectedRoute";
 
 const RegistraModeratore = () => {
@@ -55,6 +56,7 @@ const RegistraModeratore = () => {
     <ProtectedRoute>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.card}>
+          <Backbutton navigation={navigation} />
           <Text style={styles.title}>🆕 Registra un Moderatore</Text>
 
           <TextInput

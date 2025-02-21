@@ -26,6 +26,9 @@ const Navbar = () => {
         <TouchableOpacity onPress={() => navigation.navigate('AreaModeratori')}>
           <Text style={styles.link}>Area Moderatori</Text>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('About')}>
+          <Text style={styles.link}>Chi Siamo</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Logout')}>
           <Text style={styles.link}>Log Out</Text>
         </TouchableOpacity>
@@ -38,7 +41,7 @@ export default Navbar;
 
 const styles = StyleSheet.create({
   navbar: {
-    backgroundColor: '#000', // sfondo scuro
+    backgroundColor: '#000',
     paddingVertical: 10,
     paddingHorizontal: 15,
     flexDirection: 'row',
