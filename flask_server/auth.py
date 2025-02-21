@@ -19,6 +19,7 @@ login_model = auth_ns.model(
     "Login",
     {
         "username":fields.String(max_length=32),
+        "email":fields.String(required=True, max_length=64),
         "password":fields.String(required=True, max_length=32)
     }
 )
@@ -41,12 +42,14 @@ class ModeratoriResource(Resource):
         #Make a new moderatore
         data = request.get_json()
         
+        print(f"\n\n {data} \n\n")
+
         user_check = Moderatori.query.filter_by(username=data.get('username')).first()
         if user_check:
-            return jsonify({"message":f"Esiste già un moderatore chiamato {data.get('username')}!"})
+            return make_response(jsonify({"message":f"Esiste già un moderatore chiamato {data.get('username')}!"}), 403)
         email_check = Moderatori.query.filter_by(email=data.get('email')).first()
         if email_check:
-            return jsonify({"message":f"Esiste già un moderatore con {data.get('email')} come email assegnata!"})
+            return make_response(jsonify({"message":f"Esiste già un moderatore con {data.get('email')} come email assegnata!"}), 403)
 
         new_moderatore = Moderatori(
             username = data.get('username'),
@@ -69,18 +72,24 @@ class ModeratoriResource(Resource):
         username = data.get('username')
         password = data.get('password')
         user_check = Moderatori.query.filter_by(username=username).first()
+        if not user_check:
+            return make_response(jsonify({"error": "Login fallito. Utente non trovato."}), 404)
 
         if user_check and check_password_hash(user_check.password, password):
             access_token = create_access_token(identity = user_check.username)
             refresh_token = create_refresh_token(identity = user_check.username)
             
             return jsonify(
-                {"message":"Login effettuato con successo!","access_token":access_token, "refresh_token":refresh_token}
+                {
+                "message":"Login effettuato con successo!",
+                "access_token":access_token, 
+                "refresh_token":refresh_token
+                }
             )
         elif user_check and not check_password_hash(user_check.password, password):
-            return {"messagge":"Password errata!"}
+            return make_response(jsonify({"error": "Password errata!"}), 401)
         else:
-            return {"messagge":"Login fallito."}
+            return make_response(jsonify({"error": "Login fallito. Utente non trovato."}), 404)
         
 @auth_ns.route('/moderatori/<string:username>', methods=['GET', 'PUT', 'DELETE'])
 class ModeratoriResource(Resource):
@@ -91,7 +100,7 @@ class ModeratoriResource(Resource):
         #Get a moderatore by username
         moderatore = Moderatori.query.filter_by(username=username).first()
         if moderatore is None:
-            return {'message': 'Moderatore non trovato'}, 404
+            return jsonify({'message': 'Moderatore non trovato'})
         return moderatore
 
     @jwt_required()

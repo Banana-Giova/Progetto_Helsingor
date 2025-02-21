@@ -31,13 +31,13 @@ function Navbar() {
               <Link className="nav-link" to="/spettacoli">Spettacoli Programmati</Link>
             </li>
             <li className="nav-item border-start ps-2">
-              <Link className="nav-link" to="/prenotazioni">Prenotazioni</Link>
+              <Link className="nav-link" to="/prenotazioni/form">Prenotazioni</Link>
             </li>
             <li className="nav-item border-start ps-2">
-              <Link className="nav-link" to="/moderatori">Area Moderatori</Link>
+              <Link className="nav-link" to="/moderatori/area">Area Moderatori</Link>
             </li>
             <li className="nav-item border-start ps-2">
-              <Link className="nav-link" to="/logout">Log Out</Link>
+              <Link className="nav-link" to="moderatori/logout">Log Out</Link>
             </li>
           </ul>
         </div>

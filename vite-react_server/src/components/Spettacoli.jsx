@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function Spettacoli() {
-    return(
-        <div>
-            <h1>Spettacoli</h1>
-        </div>
-    )
-}
+const Spettacoli = () => {
+  return <img src={'/helsingor_bg.png'} alt="Locandina" width="700" />;
+};
 
-export default Spettacoli
+export default Spettacoli;

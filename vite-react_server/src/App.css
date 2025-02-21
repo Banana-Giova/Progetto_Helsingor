@@ -18,6 +18,22 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.single-prenotazione {
+  background-color: #352f2f;  /* Sfondo nero */
+  color: #fff;             /* Testo bianco */
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.single-moderatore {
+  background-color: #352f2f;  /* Sfondo nero */
+  color: #fff;             /* Testo bianco */
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
 body {
   background: url('/hels_blur_bg.png') no-repeat center center fixed;
   background-size: cover;

@@ -1,6 +1,7 @@
 from flask_restx import Resource, Namespace, fields #type:ignore
 from models import *
 from methods import *
+from datetime import datetime
 from flask import Flask, request, jsonify, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token, create_refresh_token, jwt_required #type: ignore
@@ -19,6 +20,8 @@ prenotazioni_model = preno_ns.model(
         "posti_bimbi": fields.Integer(required=True),
         "via_mail": fields.Boolean(required=True),
         "donazioni": fields.String(required=False, max_length=64),
+        "referente": fields.String(required=False, max_length=64),
+        "mail_future": fields.Boolean(required=True),
         "istante": fields.Integer(required=True)
     }
 )
@@ -48,7 +51,7 @@ class PrenotazioniResource(Resource):
             posti_bimbi = data.get('posti_bimbi'),
             via_mail = data.get('via_mail'),
             donazioni = data.get('donazioni'),
-            istante = data.get('istante')
+            istante = int(datetime.now().timestamp())
         )
         new_prenotazione.save()
         
@@ -57,6 +60,7 @@ class PrenotazioniResource(Resource):
         referente = f"Referente di {new_prenotazione.nominativo} => {refyes_refno if refyes_refno != None and refyes_refno != '' else 'Nessuno'}"
         mfyes_mfno = data.get('mail_future')
         mail_future = f"L'utente desidera mail in futuro, ecco la sua mail: '{new_prenotazione.email}'" if mfyes_mfno else "L'utente non desidera mail in futuro"
+
 
         references_and_mails = load_refama()
         references_and_mails[new_prenotazione.id] = (referente, mail_future)
