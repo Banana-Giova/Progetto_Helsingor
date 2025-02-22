@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, ActivityIndicator, StyleSheet, Alert } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, StyleSheet, Alert, ScrollView } from 'react-native';
 import authAxios from '../utils/AuthAxios';
 import Backbutton from '../utils/Backbutton';
 import ProtectedRoute from '../utils/ProtectedRoute';
+import { useNavigation } from '@react-navigation/native';
 
 const ViewModeratori = () => {
   const [moderatori, setModeratori] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchModeratori = async () => {
@@ -54,24 +56,27 @@ const ViewModeratori = () => {
 
   return (
     <ProtectedRoute>
-      <View style={styles.container}>
-        <Text style={styles.title}>Lista dei Moderatori</Text>
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.container}>
+        <Backbutton navigation={navigation} />
+          <Text style={styles.title}>Lista dei Moderatori</Text>
 
-        {moderatori.length === 0 ? (
-          <Text style={styles.noDataText}>Nessun moderatore trovato.</Text>
-        ) : (
-          <FlatList
-            data={moderatori}
-            keyExtractor={(item) => item.username} // 🔹 Fixato: ora usa username come chiave unica
-            renderItem={({ item }) => (
-              <View style={styles.card}>
-                <Text style={styles.username}>👤 {item.username}</Text>
-                <Text style={styles.email}>📧 {item.email || "Email non disponibile"}</Text>
-              </View>
-            )}
-          />
-        )}
-      </View>
+          {moderatori.length === 0 ? (
+            <Text style={styles.noDataText}>Nessun moderatore trovato.</Text>
+          ) : (
+            <FlatList
+              data={moderatori}
+              keyExtractor={(item) => item.username}
+              renderItem={({ item }) => (
+                <View style={styles.card}>
+                  <Text style={styles.username}>👤 {item.username}</Text>
+                  <Text style={styles.email}>📧 {item.email || "Email non disponibile"}</Text>
+                </View>
+              )}
+            />
+          )}
+        </View>
+      </ScrollView>
     </ProtectedRoute>
   );
 };

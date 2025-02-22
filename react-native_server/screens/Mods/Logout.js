@@ -8,11 +8,9 @@ const Logout = () => {
 
   useEffect(() => {
     const logoutUser = async () => {
-      // Rimuove i token
       await AsyncStorage.removeItem("accessToken");
       await AsyncStorage.removeItem("refreshToken");
 
-      // Reindirizza alla home
       navigation.reset({
         index: 0,
         routes: [{ name: 'Home' }],

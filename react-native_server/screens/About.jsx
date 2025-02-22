@@ -62,4 +62,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
+  subtitle: {
+    fontSize: 16,
+    color: '#ccc',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
 });

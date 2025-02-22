@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthProvider } from './AuthContext';
 import { DrawerFunc } from './DrawerFunc';

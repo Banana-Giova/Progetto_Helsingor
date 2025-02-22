@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, ActivityIndicator, StyleSheet, Alert } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, StyleSheet, Alert, ScrollView } from 'react-native';
 import authAxios from '../utils/AuthAxios';
 import Backbutton from '../utils/Backbutton';
 import ProtectedRoute from '../utils/ProtectedRoute';
+import { useNavigation } from '@react-navigation/native';
 
 const ViewPrenotazioni = () => {
   const [prenotazioni, setPrenotazioni] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const fetchPrenotazioni = async () => {
@@ -54,7 +56,9 @@ const ViewPrenotazioni = () => {
 
   return (
     <ProtectedRoute>
+      <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.container}>
+        <Backbutton navigation={navigation} />
         <Text style={styles.title}>Lista delle Prenotazioni</Text>
 
         {prenotazioni.length === 0 ? (
@@ -62,8 +66,8 @@ const ViewPrenotazioni = () => {
         ) : (
           <FlatList
             data={prenotazioni}
-            keyExtractor={(item) => item.id.toString()} // 🔹 Usa l'ID come chiave unica
-            contentContainerStyle={styles.listContainer} // 🔹 Centra le card nella lista
+            keyExtractor={(item) => item.id.toString()}
+            contentContainerStyle={styles.listContainer}
             renderItem={({ item }) => (
               <View style={styles.card}>
                 <Text style={styles.nominativo}>👤 {item.nominativo}</Text>
@@ -80,6 +84,7 @@ const ViewPrenotazioni = () => {
           />
         )}
       </View>
+      </ScrollView>
     </ProtectedRoute>
   );
 };
@@ -89,7 +94,7 @@ export default ViewPrenotazioni;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212', // Sfondo scuro
+    backgroundColor: '#121212',
     padding: 20,
   },
   title: {
@@ -129,17 +134,17 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   listContainer: {
-    alignItems: 'center', // 🔹 Centra le card nella lista
+    alignItems: 'center',
   },
   card: {
     backgroundColor: '#333',
     padding: 12,
-    width: '100%', // 🔹 Più grande rispetto ai moderatori
+    width: '100%',
     borderRadius: 8,
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#444',
-    alignSelf: 'center', // 🔹 Centra la singola card
+    alignSelf: 'center',
   },
   nominativo: {
     fontSize: 18,

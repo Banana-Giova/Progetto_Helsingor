@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView 
 import authAxios from "../utils/AuthAxios";
 import Backbutton from "../utils/Backbutton";
 import ProtectedRoute from "../utils/ProtectedRoute";
+import { useNavigation } from '@react-navigation/native';
 
 const RegistraModeratore = () => {
   const [username, setUsername] = useState("");
@@ -11,6 +12,7 @@ const RegistraModeratore = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const navigation = useNavigation();
 
   const handleRegister = async () => {
     if (!username.trim()) {

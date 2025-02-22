@@ -9,7 +9,7 @@ const HomeScreen = ({ navigation }) => {
       {screenWidth < 600 ? (
         // Layout per dispositivi mobili
         <ImageBackground 
-          source={require('../assets/hels_moon.png')}
+          source={require('../assets/mob_hels_moon.png')}
           style={styles.backgroundMobile} 
           resizeMode="cover"
         >
@@ -85,7 +85,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    resizeMode: 'contain', // Adatta l'immagine senza distorcerla, mantenendo le proporzioni
+    width: '100%',
+    height: '100%',  // Imposta l'altezza per occupare l'intero schermo
   },
+  
   // Stile per desktop o tablet (screenWidth >= 600)
   backgroundDesktop: {
     flex: 1,

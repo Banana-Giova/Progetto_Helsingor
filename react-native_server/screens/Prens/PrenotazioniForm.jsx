@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Switch, TouchableOpacity, Alert, StyleSheet, ScrollView } from "react-native";
 import axios from "axios";
+import Backbutton from '../utils/Backbutton';
 import { useNavigation } from "@react-navigation/native";
 
 const PrenotazioniForm = () => {
@@ -45,6 +46,7 @@ const PrenotazioniForm = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.card}>
+        <Backbutton navigation={navigation} />
         <Text style={styles.title}>📅 Prenota il tuo spettacolo</Text>
         <TextInput style={styles.input} placeholder="Nominativo" value={nominativo} onChangeText={setNominativo} placeholderTextColor="#aaa" />
         <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} keyboardType="email-address" placeholderTextColor="#aaa" />

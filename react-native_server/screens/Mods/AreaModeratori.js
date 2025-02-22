@@ -1,25 +1,37 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import ProtectedRoute from '../utils/ProtectedRoute';
+import Homebutton from '../utils/Homebutton';
 
 const AreaModeratori = ({ navigation }) => {
+  const screenWidth = Dimensions.get('window').width;
+  
   return (
     <ProtectedRoute >
-      <View style={styles.container}>
-        <Text style={styles.title}>Benvenuto nell'Area Moderatori!</Text>
-        <View style={styles.divider} />
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.container}>
+          <Homebutton navigation={navigation} />
+          <Text style={styles.title}>Benvenuto nell'Area Moderatori!</Text>
+          <View style={styles.divider} />
 
-        <MenuButton text="Visualizza le prenotazioni" onPress={() => navigation.navigate('ViewPrenotazioni')} />
-        <MenuButton text="Modifica una prenotazione" onPress={() => navigation.navigate('ModificaPrenotazione')} />
-        <MenuButton text="Elimina una prenotazione" onPress={() => navigation.navigate('EliminaPrenotazione')} />
+          <MenuButton text="Visualizza le prenotazioni" onPress={() => navigation.navigate('ViewPrenotazioni')} />
+          <MenuButton text="Modifica una prenotazione" onPress={() => navigation.navigate('ModificaPrenotazione')} />
+          <MenuButton text="Elimina una prenotazione" onPress={() => navigation.navigate('EliminaPrenotazione')} />
 
-        <View style={styles.divider} />
+          <View style={styles.divider} />
 
-        <MenuButton text="Registra un nuovo moderatore" onPress={() => navigation.navigate('RegistraModeratore')} />
-        <MenuButton text="Visualizza tutti i moderatori" onPress={() => navigation.navigate('ViewModeratori')} />
-        <MenuButton text="Cambia la password di un moderatore" onPress={() => navigation.navigate('ModificaModeratore')} />
-        <MenuButton text="Elimina un moderatore" onPress={() => navigation.navigate('EliminaModeratore')} />
-      </View>
+          <MenuButton text="Registra un nuovo moderatore" onPress={() => navigation.navigate('RegistraModeratore')} />
+          <MenuButton text="Visualizza tutti i moderatori" onPress={() => navigation.navigate('ViewModeratori')} />
+          <MenuButton text="Cambia la password di un moderatore" onPress={() => navigation.navigate('ModificaModeratore')} />
+          <MenuButton text="Elimina un moderatore" onPress={() => navigation.navigate('EliminaModeratore')} />
+        
+          {screenWidth < 600 ? (            
+            <MenuButton text="Logout" onPress={() => navigation.navigate('Logout')} />
+          ):(
+            <></>
+          )}
+        </View>
+      </ScrollView>
     </ProtectedRoute>
   );
 };

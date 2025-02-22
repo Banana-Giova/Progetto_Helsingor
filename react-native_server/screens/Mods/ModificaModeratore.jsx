@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView 
 import authAxios from "../utils/AuthAxios";
 import Backbutton from '../utils/Backbutton';
 import ProtectedRoute from "../utils/ProtectedRoute";
+import { useNavigation } from '@react-navigation/native';
 
 const ModificaModeratore = () => {
   const [username, setUsername] = useState("");
@@ -10,6 +11,7 @@ const ModificaModeratore = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const navigation = useNavigation();
 
   const handleUpdate = async () => {
     if (!username.trim()) {
@@ -43,6 +45,7 @@ const ModificaModeratore = () => {
     <ProtectedRoute>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.card}>
+        <Backbutton navigation={navigation} />
           <Text style={styles.title}>🔑 Modifica Password Moderatore</Text>
 
           <TextInput 

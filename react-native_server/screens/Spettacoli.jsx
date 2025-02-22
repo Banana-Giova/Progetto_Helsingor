@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Dimensions } from "react-native";
 
 const Spettacoli = () => {
   return (
+    
     <View style={styles.container}>
       <Image source={require('../assets/helsingor_bg.png')} style={styles.image} />
     </View>
@@ -19,8 +20,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
   },
   image: {
-    width: 600,
-    height: 800,
+    width: (Dimensions.get('window').width)*0.8,
+    height: (Dimensions.get('window').height)*0.8,
     resizeMode: "contain",
   },
 });

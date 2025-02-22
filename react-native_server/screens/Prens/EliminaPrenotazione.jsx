@@ -3,11 +3,13 @@ import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from "reac
 import authAxios from "../utils/AuthAxios";
 import Backbutton from '../utils/Backbutton';
 import ProtectedRoute from "../utils/ProtectedRoute";
+import { useNavigation } from '@react-navigation/native';
 
 const EliminaPrenotazione = () => {
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const navigation = useNavigation();
 
   const handleDelete = async () => {
     if (!id.trim()) {
@@ -34,6 +36,7 @@ const EliminaPrenotazione = () => {
     <ProtectedRoute>
       <View style={styles.container}>
         <View style={styles.card}>
+        <Backbutton navigation={navigation} />
           <Text style={styles.title}>Elimina Prenotazione</Text>
           <TextInput
             style={styles.input}

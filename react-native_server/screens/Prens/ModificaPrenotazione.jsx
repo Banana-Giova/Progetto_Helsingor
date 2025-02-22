@@ -3,6 +3,7 @@ import { View, Text, TextInput, Switch, TouchableOpacity, Alert, StyleSheet, Scr
 import authAxios from "../utils/AuthAxios";
 import Backbutton from '../utils/Backbutton';
 import ProtectedRoute from "../utils/ProtectedRoute";
+import { useNavigation } from '@react-navigation/native';
 
 const ModificaPrenotazione = () => {
   const [id, setId] = useState("");
@@ -16,6 +17,7 @@ const ModificaPrenotazione = () => {
   const [referente, setReferente] = useState("");
   const [mailFuture, setMailFuture] = useState(false);
   const [message, setMessage] = useState("");
+  const navigation = useNavigation();
 
   const handleUpdate = async () => {
     if (!id.trim()) {
@@ -49,6 +51,7 @@ const ModificaPrenotazione = () => {
     <ProtectedRoute>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.card}>
+        <Backbutton navigation={navigation} />
           <Text style={styles.title}>✏️ Modifica Prenotazione</Text>
 
           <TextInput style={styles.input} placeholder="ID Prenotazione" placeholderTextColor="#aaa" value={id} onChangeText={setId} keyboardType="text" />
