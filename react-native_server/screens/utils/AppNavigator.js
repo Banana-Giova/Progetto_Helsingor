@@ -3,7 +3,6 @@ import { View, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { AuthProvider } from './AuthContext';
-import { DrawerFunc } from './DrawerFunc';
 
 import Navbar from "../Navbar";
 
@@ -35,14 +34,11 @@ const AppNavigator = () => {
       <AuthProvider>
         <NavigationContainer>
           <SafeAreaView style={styles.safeContainer}>
-            {/* Controlliamo se lo schermo è mobile o desktop */}
               <>
-                {/* Navbar orizzontale su dispositivi desktop */}
                 {screenWidth > 600 ? (<Navbar />):(<></>)}
                 <View style={styles.container}>
                   <Stack.Navigator screenOptions={{ headerShown: false }}>
                     {/* Route Pubbliche */}
-                    {screenWidth < 600 ? (<Stack.Screen name="DrawerFunc" component={DrawerFunc} />):(<></>)}
                     <Stack.Screen name="Home" component={HomePage} />
                     <Stack.Screen name="PrenotazioniForm" component={PrenotazioniForm} />
                     <Stack.Screen name="Login" component={LoginModeratore} />

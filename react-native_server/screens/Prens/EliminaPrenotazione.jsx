@@ -38,6 +38,8 @@ const EliminaPrenotazione = () => {
         <View style={styles.card}>
         <Backbutton navigation={navigation} />
           <Text style={styles.title}>Elimina Prenotazione</Text>
+          <View style={{ height: 30 }} />
+          
           <TextInput
             style={styles.input}
             placeholder="Valore ID"

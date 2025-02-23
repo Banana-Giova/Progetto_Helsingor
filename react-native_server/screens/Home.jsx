@@ -28,6 +28,12 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
             <TouchableOpacity 
               style={styles.button} 
+              onPress={() => navigation.navigate('Spettacoli')}
+            >
+              <Text style={styles.buttonText}>Spettacoli</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.button} 
               onPress={() => navigation.navigate('AreaModeratori')}
             >
               <Text style={styles.buttonText}>Area Moderatori</Text>
@@ -79,18 +85,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
+    flexDirection: 'column',
+    justifyContent: 'center',
+
   },
-  // Stile per dispositivi mobili (screenWidth < 600)
+
   backgroundMobile: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    resizeMode: 'contain', // Adatta l'immagine senza distorcerla, mantenendo le proporzioni
+    resizeMode: 'contain',
     width: '100%',
-    height: '100%',  // Imposta l'altezza per occupare l'intero schermo
+    height: '100%',
   },
   
-  // Stile per desktop o tablet (screenWidth >= 600)
   backgroundDesktop: {
     flex: 1,
     justifyContent: 'center',

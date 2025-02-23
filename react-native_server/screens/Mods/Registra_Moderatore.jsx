@@ -60,6 +60,7 @@ const RegistraModeratore = () => {
         <View style={styles.card}>
           <Backbutton navigation={navigation} />
           <Text style={styles.title}>🆕 Registra un Moderatore</Text>
+          <View style={{ height: 30 }} />
 
           <TextInput
             style={styles.input}

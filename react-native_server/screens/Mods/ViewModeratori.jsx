@@ -86,7 +86,7 @@ export default ViewModeratori;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212', // Sfondo scuro
+    backgroundColor: '#121212',
     padding: 20,
   },
   title: {

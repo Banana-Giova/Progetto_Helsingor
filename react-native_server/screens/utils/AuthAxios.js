@@ -38,7 +38,7 @@ authAxios.interceptors.response.use(
         } catch (refreshError) {
           await AsyncStorage.removeItem('accessToken');
           await AsyncStorage.removeItem('refreshToken');
-          // Se usi React Navigation, dovresti navigare all'interno dell'app invece di fare window.location.href
+         
           return Promise.reject(refreshError);
         }
       }

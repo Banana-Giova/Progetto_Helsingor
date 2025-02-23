@@ -36,7 +36,6 @@ const LoginModeratore = () => {
             <Backbutton navigation={navigation} />
             <Text style={styles.title}>Sei un Moderatore? Accedi qui!</Text>
 
-            {/* Username */}
             <Controller
                 control={control}
                 name="username"
@@ -56,7 +55,6 @@ const LoginModeratore = () => {
             />
             {errors.username && <Text style={styles.error}>{errors.username.message}</Text>}
 
-            {/* Password */}
             <Controller
                 control={control}
                 name="password"
@@ -78,7 +76,6 @@ const LoginModeratore = () => {
             />
             {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
 
-            {/* Bottone Login */}
             <TouchableOpacity style={styles.button} onPress={handleSubmit(loginForm)}>
                 <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
@@ -101,6 +98,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
         marginBottom: 20,
+        textAlign: 'center',
     },
     input: {
         width: '40%',

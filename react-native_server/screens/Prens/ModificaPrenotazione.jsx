@@ -53,6 +53,7 @@ const ModificaPrenotazione = () => {
         <View style={styles.card}>
         <Backbutton navigation={navigation} />
           <Text style={styles.title}>✏️ Modifica Prenotazione</Text>
+          <View style={{ height: 30 }} />
 
           <TextInput style={styles.input} placeholder="ID Prenotazione" placeholderTextColor="#aaa" value={id} onChangeText={setId} keyboardType="text" />
           <TextInput style={styles.input} placeholder="Email" placeholderTextColor="#aaa" value={email} onChangeText={setEmail} keyboardType="email-address" />

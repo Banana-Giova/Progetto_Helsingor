@@ -7,7 +7,6 @@ export const AuthProvider = ({ children }) => {
     const [userToken, setUserToken] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Controlla se c'è un token salvato
     useEffect(() => {
         const loadToken = async () => {
             try {
@@ -21,13 +20,11 @@ export const AuthProvider = ({ children }) => {
         loadToken();
     }, []);
 
-    // Login → Salva token
     const login = async (token) => {
         setUserToken(token);
         await AsyncStorage.setItem('accessToken', token);
     };
 
-    // Logout → Cancella token
     const logout = async () => {
         setUserToken(null);
         await AsyncStorage.removeItem('accessToken');

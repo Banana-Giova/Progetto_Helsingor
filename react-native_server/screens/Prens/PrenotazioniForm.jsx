@@ -48,6 +48,8 @@ const PrenotazioniForm = () => {
       <View style={styles.card}>
         <Backbutton navigation={navigation} />
         <Text style={styles.title}>📅 Prenota il tuo spettacolo</Text>
+        <View style={{ height: 30 }} />
+        
         <TextInput style={styles.input} placeholder="Nominativo" value={nominativo} onChangeText={setNominativo} placeholderTextColor="#aaa" />
         <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} keyboardType="email-address" placeholderTextColor="#aaa" />
         <TextInput style={styles.input} placeholder="Giorno Scelto (es. 2024-05-12)" value={giornoScelto} onChangeText={setGiornoScelto} placeholderTextColor="#aaa" />

@@ -47,6 +47,7 @@ const ModificaModeratore = () => {
         <View style={styles.card}>
         <Backbutton navigation={navigation} />
           <Text style={styles.title}>🔑 Modifica Password Moderatore</Text>
+          <View style={{ height: 30 }} />
 
           <TextInput 
             style={styles.input} 

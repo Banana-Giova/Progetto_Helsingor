@@ -3,12 +3,13 @@ import { View, Text, TouchableOpacity, StyleSheet, Dimensions, ScrollView } from
 import ProtectedRoute from '../utils/ProtectedRoute';
 import Homebutton from '../utils/Homebutton';
 
+const screenWidth = Dimensions.get('window').width;
+
 const AreaModeratori = ({ navigation }) => {
-  const screenWidth = Dimensions.get('window').width;
   
   return (
     <ProtectedRoute >
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.container}>
           <Homebutton navigation={navigation} />
           <Text style={styles.title}>Benvenuto nell'Area Moderatori!</Text>
@@ -45,13 +46,16 @@ const MenuButton = ({ text, onPress }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1e1e1e',
     padding: 20,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    backgroundColor: '#1e1e1e',
   },
   title: {
-    fontSize: 22,
+    fontSize: screenWidth < 600 ? 18 : 22,
     fontWeight: 'bold',
     color: '#fff',
     marginBottom: 20,
@@ -59,17 +63,17 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 2,
-    width: '80%',
+    width: screenWidth < 600 ? '60%' : '70%',
     backgroundColor: '#444',
     marginVertical: 20,
   },
   button: {
     backgroundColor: '#d9534f',
     paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingHorizontal: screenWidth * 0.1,
     borderRadius: 8,
     marginBottom: 10,
-    width: '80%',
+    width: screenWidth < 600 ? '60%' : '70%',
     alignItems: 'center',
   },
   buttonText: {

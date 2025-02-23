@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "react-native_server",
-    "slug": "react-native_server",
+    "name": "Teatro Stabile Helsingor",
+    "slug": "Teatro Stabile Helsingor",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "icon": "./assets/hels_icon.png",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/hels_icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,7 +22,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/hels_icon.png"
     }
   }
 }
