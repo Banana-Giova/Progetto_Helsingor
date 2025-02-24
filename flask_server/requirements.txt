@@ -1,0 +1,13 @@
+Flask
+psycopg2-binary
+requests
+python-decouple
+flask_restx
+flask_sqlalchemy
+flask_migrate
+python-dotenv
+sqlalchemy
+python-dotenv
+Flask-JWT-Extended
+flask-cors
+gunicorn

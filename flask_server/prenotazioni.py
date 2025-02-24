@@ -38,8 +38,6 @@ class PrenotazioniResource(Resource):
 
     @preno_ns.expect(prenotazioni_model)
     def post(self):
-        #Make a new prenotazione
-        #ONLY IF PRENOTAZIONI ARE DISPONIBILI
         data = request.get_json()
         
         new_prenotazione = Prenotazioni(
