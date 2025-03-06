@@ -1,5 +1,5 @@
 # Portfolio Fotografico Progetto Helsingor
-## Schermate da Cellulare
+## Schermate da Cellulare - React Native
 
 > NB: I bordi di colore diverso della schermata ed il simbolo in basso a destra sono presenti solo negli screenshot effettuati da emulatore Android. Sono assenti nel prodotto finale.
 
