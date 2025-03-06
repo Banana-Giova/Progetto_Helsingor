@@ -1,6 +1,8 @@
 # Portfolio Fotografico Progetto Helsingor
 ## Schermate da Cellulare
 
+> NB: I bordi di colore diverso della schermata ed il simbolo in basso a destra sono presenti solo negli screenshot effettuati da emulatore Android. Sono assenti nel prodotto finale.
+
 Homepage:
 
 ![Homepage](https://github.com/Banana-Giova/Progetto_Helsingor/blob/main/react-native_server/portfolio_foto_phone/homepage_rn_phone.png)
